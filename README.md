@@ -7,6 +7,7 @@
 
 ## final_review_data.csv
 
+-    변수명 : name(매장명), type(매장종류), rating(별점), descript(매장설명글), 1st_keyword, 2ed_keyword, 3rd_keyword, review(방문자 텍스트 리뷰) 
 -    신촌 맛집(312개)과 이대 맛집(312개) 데이터를 concatenate
 -    중복되는 매장을 제거
 -    최종적으로 총 577개의 데이터 수집
