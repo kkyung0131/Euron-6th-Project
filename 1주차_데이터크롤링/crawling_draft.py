@@ -169,5 +169,5 @@ def naverMapCrawling(search):
     df.to_csv("result1.csv", index=False) # 내보낼 파일 이름 설정
 
 # 함수 실행
-search = "동탄 맛집" # 여기에 검색어 입력
+search = "이대 맛집" # 여기에 검색어 입력
 naverMapCrawling(search)
