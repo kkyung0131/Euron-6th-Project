@@ -2,6 +2,8 @@ import json
 import time
 from time import sleep
 import re
+import pandas as pd
+import os
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -12,7 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 url = 'https://map.naver.com/v5/search'
 driver = webdriver.Chrome()  # 드라이버 경로
 driver.get(url)
-key_word = '이대 맛집'  # 검색어
+key_word = '신촌 맛집'  # 검색어
 
 # css 찾을때 까지 10초대기
 def time_wait(num, code):
@@ -37,25 +39,6 @@ def page_down(num):
     for i in range(num):
         body.send_keys(Keys.PAGE_DOWN)
 
-def infinite_loop(driver):
-    # 최초 페이지 스크롤 설정
-    # 스크롤 시키지 않았을 때의 전체 높이
-    last_page_height = driver.execute_script("return document.documentElement.scrollHeight")
-
-    while True:
-        # 윈도우 창을 0에서 위에서 설정한 전체 높이로 이동
-        driver.execute_script("window.scrollTo(0, document.documentElement.scrollHeight);")
-        time.sleep(1.0)
-        # 스크롤 다운한 만큼의 높이를 신규 높이로 설정 
-        new_page_height = driver.execute_script("return document.documentElement.scrollHeight")
-        # 직전 페이지 높이와 신규 페이지 높이 비교
-        if new_page_height == last_page_height:
-            time.sleep(1.0)
-            # 신규 페이지 높이가 이전과 동일하면, while문 break
-            if new_page_height == driver.execute_script("return document.documentElement.scrollHeight"):
-                break
-        else:
-            last_page_height = new_page_height
 
 # css를 찾을때 까지 10초 대기
 time_wait(10, 'div.input_box > input.input_search')
@@ -70,7 +53,7 @@ sleep(1)
 # (2) frame 변경
 switch_frame('searchIframe')
 page_down(80)
-sleep(5)
+sleep(1)
 
 # 가게 리스트
 #parking_list = driver.find_elements(By.CSS_SELECTOR, 'li.UEzoS')
@@ -88,32 +71,35 @@ for btn in range(len(next_btn))[1:]:  # next_btn[0] = 이전 페이지 버튼 �
     
     gage_list = driver.find_elements(By.CSS_SELECTOR, 'li.UEzoS')
     names = driver.find_elements(By.CSS_SELECTOR, '.place_bluelink')  # (3) 가게명
-    types = driver.find_elements(By.CSS_SELECTOR, '.KCMnt')  # (4) 가게 유형
+    #types = driver.find_elements(By.CSS_SELECTOR, '.KCMnt')  # (4) 가게 유형
 
-    temp_index = 1 # 현 페이지 내 가게 인덱스 변수
+    
     for data in range(len(gage_list)):  # 가게 리스트 만큼
         print(data)
 
         sleep(1)
         try:
             
-            # (3) 가게이름 가져오기
-            title = names[data].text
-            print(title)
-
-            # (4) 유형
-            category = types[data].text
-            print(category)
-            
             # 상세페이지로 이동
-            button_tmp = '#_pcmap_list_scroll_container > ul > li:nth-child('+ str(temp_index) +') > div.CHC5F > a > div > div > span.place_bluelink.TYaxT'
+            button_tmp = '#_pcmap_list_scroll_container > ul > li:nth-child('+ str(data+1) +') > div.CHC5F > a > div > div > span.place_bluelink.TYaxT'
             driver.find_element(By.CSS_SELECTOR, button_tmp).click()
-
+            
             # 로딩 기다리기
-            sleep(1)
+            sleep(10)
 
             # 상세페이지로 프레임 전환
             switch_frame('entryIframe')
+
+            # 가게 이름
+            title = driver.find_element(By.CSS_SELECTOR, '.GHAhO').text
+            print(title)
+            # 유형
+            try:
+                category = driver.find_element(By.CSS_SELECTOR, '.lnJFt').text
+                print(category)
+            except:
+                category = ""
+                print("음식 카테고리 없음")
 
             # 별점
             try: 
@@ -136,7 +122,7 @@ for btn in range(len(next_btn))[1:]:  # next_btn[0] = 이전 페이지 버튼 �
             
             # 스크롤
             page_down(10)
-            sleep(5)
+            sleep(2)
 
             # 대표 키워드 (3개)
             try: 
@@ -154,20 +140,31 @@ for btn in range(len(next_btn))[1:]:  # next_btn[0] = 이전 페이지 버튼 �
                 print("키워드 없음")
             
             # 리뷰 탭으로 이동
-            driver.find_element(By.CSS_SELECTOR, '#app-root > div > div > div > div.place_fixed_maintab.place_stuck.place_tab_shadow > div > div > div > div > a:nth-child(5) > span').click()
-
+            try:
+                tabs = driver.find_elements(By.CSS_SELECTOR, 'span.veBoZ')
+                for tab in tabs:
+                    if(tab.text == '리뷰'):
+                        tab.click()
+                        sleep(5)
+                        break
+                
+            except Exception as e:
+                print("리뷰 탭을 찾을 수 없습니다.", e)
+                switch_frame('searchIframe')
+                continue
             # 긴 리뷰 펼치기
             try:
                 extension_btn = driver.find_elements(By.CSS_SELECTOR, 'span.rvCSr')
                 for btn in extension_btn:
                     btn.click()
+                    sleep(1)
             except:
                 print("긴 리뷰 없음")
 
-            # 리뷰(5개)
+            # 리뷰(10개)
             try:             
                 reviews = ""
-                for i in range(5):
+                for i in range(10):
                     try:
                         review = driver.find_elements(By.CSS_SELECTOR, 'span.zPfVt')[i].text
                         if(i == 0):
@@ -188,39 +185,56 @@ for btn in range(len(next_btn))[1:]:  # next_btn[0] = 이전 페이지 버튼 �
                 'name': title,
                 'rating' : score_num,
                 'type': category,
-                
+                'descript' : descript,
+                'reviews' : reviews,
+                'keyword1' : keyword1,
+                'keyword2' : keyword2,
+                'keyword3' : keyword3
             }
 
             parking_dict['가게데이터'].append(dict_temp)
+            if os.path.exists('./res_0712_2.csv'):
+                res = pd.read_csv('./res_0712_2.csv')
+            else:
+                res = pd.DataFrame(columns=['name', 'rating', 'type', 'descript', 'reviews', 'keyword1', 'keyword2', 'keyword3'])
+            new_data = pd.DataFrame([dict_temp])
+            res = pd.concat([res, new_data], ignore_index=True)
+            res.to_csv('./res_0712_2.csv', index = False)
             print(f'{title} ...완료')
 
             sleep(1)
+            #driver.close()
+            switch_frame('searchIframe')
 
         except Exception as e:
             print(e)
-            print('ERROR!' * 3)
+            print('ERROR!')
 
             # dict에 데이터 집어넣기
             dict_temp = {
                 'name': title,
                 'rating' : score_num,
                 'type': category,
-                
+                'descript' : descript,
+                'reviews' : reviews,
+                'keyword1' : keyword1,
+                'keyword2' : keyword2,
+                'keyword3' : keyword3                
             }
 
             parking_dict['가게데이터'].append(dict_temp)
-            print(f'{title} ...완료')
+            print(f'{title} ...실패')
 
             sleep(1)
+            continue
     
-        switch_frame('searchIframe')
-        temp_index = temp_index + 1 # 가게 인덱스 +1
+        
 
     # 다음 페이지 버튼 누를 수 없으면 종료
     if not next_btn[-1].is_enabled():
         break
 
-    if names[-1]:  # 마지막 주차장일 경우 다음버튼 클릭
+    if names[-1]:  # 마지막 가게일 경우 다음버튼 클릭
         next_btn[-1].click()
         sleep(2)
     else:
@@ -230,8 +244,10 @@ for btn in range(len(next_btn))[1:]:  # next_btn[0] = 이전 페이지 버튼 �
 print('[데이터 수집 완료]\n소요 시간 :', time.time() - start)
 driver.quit()  # 작업이 끝나면 창을 닫는다.
 
-fields = ['name', 'parking_type', 'road_address', 'jibun_address']
 
 # json 파일로 저장
+'''
 with open('./store_data.json', 'w', encoding='utf-8') as f:
     json.dump(parking_dict, f, indent=4, ensure_ascii=False)
+'''
+
