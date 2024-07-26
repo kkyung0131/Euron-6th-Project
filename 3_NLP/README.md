@@ -27,7 +27,7 @@ Easy Data Augmentation(RS,RD)로 2차적으로 불균형 해소한 데이터셋
 
 ### ipynb 파일 설명
 
-NLP_(1).ipynb : 음식점/카페/주점으로 나누어 각각 기본 자연어처리를 진행한 코드
+NLP-(1).ipynb : 음식점/카페/주점으로 나누어 각각 기본 자연어처리를 진행한 코드
 
 NLP-(2).ipynb : Back Translation과 Easy Data Augmentation을 진행한 코드
 
