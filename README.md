@@ -8,4 +8,6 @@ EURON 6기 중급팀 여름 프로젝트
 
 ---
 
+## 실험노트
+[실험노트 스프레드시트](https://docs.google.com/spreadsheets/d/1-KRpIOERLEv3tAN5ebBe6ZVVKR2ql88NtrlKz9LsRmo/edit?usp=sharing)
 
