@@ -16,6 +16,17 @@
   |valid|0.8374|0.8337|
   |test|0.2975|0.2941|
 ---
+### LSTM_tuning.ipynb
+- 실험노트 7.1.2
+- batch_size=32, epoch=10, learning_rate=0.001
+- AdamW 옵티마이저 사용, weight_decay=1e-4
+- nn.LSTM의 dropout=0.4, 가중치 초기화 적용
+- 완전연결층 전 Tanh 활성화함수와 nn.Dropout(0.5) layer 추가
+  ||accuray|loss|
+  |---|---|---|
+  |valid|0.9546|0.2338|
+  |test|0.3775|1.7499|
+---
 ### ML.ipynb
 - 10개의 머신러닝 모델 베이스라인
 - CatBoost와 Voting에서 성능이 좋음 : f1-score 0.35 이상
