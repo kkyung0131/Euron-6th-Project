@@ -34,7 +34,6 @@ EURON 6기 중급팀 여름 프로젝트
 
 ---
 ## 4. 자료
-[실험노트 스프레드시트](https://docs.google.com/spreadsheets/d/1-KRpIOERLEv3tAN5ebBe6ZVVKR2ql88NtrlKz9LsRmo/edit?usp=sharing)
-[노션 링크](https://www.notion.so/euron6th/12f3130d190646a0ae1e0d601deb44ad)
-[발표 자료](https://docs.google.com/presentation/d/1gtLXNi6aeI1kAOb8uVJSBa2oYwyasSgTlgAfs0Afnnk/edit?usp=sharing)
-[발표 대본](https://docs.google.com/document/d/1eA_S3Db3ekx6Va8VshqL4THZiERRWxQPYZ6rrQMdIqU/edit?usp=sharing)
+[실험노트 스프레드시트](https://docs.google.com/spreadsheets/d/1-KRpIOERLEv3tAN5ebBe6ZVVKR2ql88NtrlKz9LsRmo/edit?usp=sharing)  
+[발표 자료](https://docs.google.com/presentation/d/1gtLXNi6aeI1kAOb8uVJSBa2oYwyasSgTlgAfs0Afnnk/edit?usp=sharing)  
+[발표 대본](https://docs.google.com/document/d/1eA_S3Db3ekx6Va8VshqL4THZiERRWxQPYZ6rrQMdIqU/edit?usp=sharing)  
