@@ -15,7 +15,7 @@ EURON 6기 중급팀 여름 프로젝트
 ---
 ## 2. 진행 과정
 - 기간: 2024.07 ~ 2024.08
-- 세부 일정
+- 세부 일정  
   ![image](https://github.com/user-attachments/assets/2c27eb43-2529-41e2-8f23-6528ca2fa120)
 
 ---
