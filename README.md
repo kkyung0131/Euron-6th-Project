@@ -10,7 +10,7 @@ EURON 6기 중급팀 여름 프로젝트
 ## 1. 참여자
 |**팀원 1**|**팀원 2**|**팀원 3**|**팀원 4**|
 |:----------:|:----------:|:----------:|:----------:|
-|[김경민](https://github.com/kkyung0131)|[박지현](https://github.com/sawoll)|[조민주](https://github.com/mummy)|[조승연](https://github.com/whyeon92)|
+|[김경민](https://github.com/kkyung0131)|[박지현](https://github.com/sawoll)|[조민주](https://github.com/mummy-alive)|[조승연](https://github.com/whyeon92)|
 
 ---
 ## 2. 진행 과정
