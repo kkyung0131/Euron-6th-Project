@@ -40,4 +40,4 @@ EURON 6기 중급팀 여름 프로젝트
 🔗[수료식 발표 자료](https://docs.google.com/presentation/d/1gtLXNi6aeI1kAOb8uVJSBa2oYwyasSgTlgAfs0Afnnk/edit?usp=sharing)  
 🔗[수료식 발표 대본](https://docs.google.com/document/d/1eA_S3Db3ekx6Va8VshqL4THZiERRWxQPYZ6rrQMdIqU/edit?usp=sharing)  
 🔗[홈커밍데이 발표 자료](https://drive.google.com/file/d/17eDOmYDX1XctNMVxrrXDJ8sBgH4SMbmL/view?usp=drive_link)  
-🔗[홈커밍데이 발표 대본](https://docs.google.com/document/d/185x6FZPnFf82wdbmwEqT9IkCJNO0yMZRfOMA1-ureTI/edit?usp=drive_link)
+🔗[홈커밍데이 발표 대본](https://drive.google.com/file/d/18D2s3eRJpA2e4MDtoz4Fpwiexqcf0Xp6/view?usp=drive_link)
